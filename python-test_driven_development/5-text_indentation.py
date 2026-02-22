@@ -1,24 +1,17 @@
 #!/usr/bin/python3
-"""Module for text indentation"""
+"""
+This module contains a function that indents text based on punctuation.
+"""
 
 
 def text_indentation(text):
-    """Prints text with 2 newlines after ., ? and :"""
+    """
+    Prints a text with 2 new lines after each of these characters: ., ? and :
+    """
     if not isinstance(text, str):
         raise TypeError("text must be a string")
 
-    special = (".", "?", ":")
-    i = 0
-    # Strip leading/trailing spaces from the whole text
-    text = text.strip()
+    for char in ".:?":
+        text = (char + "\n\n").join([line.strip(" ") for line in text.split(char)])
 
-    while i < len(text):
-        print(text[i], end="")
-        if text[i] in special:
-            print("\n")
-            i += 1
-            # Skip any spaces that follow the special character
-            while i < len(text) and text[i] == ' ':
-                i += 1
-            continue
-        i += 1
+    print(text, end="")
