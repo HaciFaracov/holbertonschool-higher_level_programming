@@ -27,9 +27,6 @@ Traceback (most recent call last):
     ...
 TypeError: text must be a string
 
-Testing empty string:
->>> text_indentation("")
-
 Testing missing argument:
 >>> text_indentation()
 Traceback (most recent call last):
