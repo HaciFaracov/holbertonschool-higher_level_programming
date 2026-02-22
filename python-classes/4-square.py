@@ -1,21 +1,18 @@
 #!/usr/bin/python3
 """
 This module defines a Square class with a private size attribute.
-It uses properties for getting and setting the size with validation.
+It utilizes property decorators for getter and setter methods.
 """
 
 
 class Square:
     """
     A class that defines a square by its size.
-
-    Attributes:
-        size (int): The side length of the square.
     """
 
     def __init__(self, size=0):
         """
-        Initializes a new Square instance.
+        Initializes the square with an optional size.
 
         Args:
             size (int): The size of the side of the square.
@@ -35,10 +32,10 @@ class Square:
     @size.setter
     def size(self, value):
         """
-        Sets the private size attribute with type and value validation.
+        Sets the size attribute with type and value validation.
 
         Args:
-            value (int): The new size to set.
+            value (int): The new size of the square.
 
         Raises:
             TypeError: If value is not an integer.
@@ -52,7 +49,7 @@ class Square:
 
     def area(self):
         """
-        Calculates and returns the current square area.
+        Calculates the current square area.
 
         Returns:
             int: The area of the square.
