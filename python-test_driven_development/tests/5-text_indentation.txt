@@ -1,4 +1,4 @@
-k>>> text_indentation = __import__('5-text_indentation').text_indentation
+>>> text_indentation = __import__('5-text_indentation').text_indentation
 
 >>> text_indentation("Hello. How are you? Fine: Thanks.")
 Hello.
@@ -8,12 +8,10 @@ How are you?
 Fine:
 <BLANKLINE>
 Thanks.
-<BLANKLINE>
 >>> text_indentation("Wait.    Check this out.")
 Wait.
 <BLANKLINE>
 Check this out.
-<BLANKLINE>
 >>> text_indentation(123)
 Traceback (most recent call last):
     ...

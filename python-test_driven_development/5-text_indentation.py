@@ -8,14 +8,17 @@ def text_indentation(text):
         raise TypeError("text must be a string")
 
     special = (".", "?", ":")
-    s = text.strip(" ")
     i = 0
-    while i < len(s):
-        print(s[i], end="")
-        if s[i] in special:
+    # Strip leading/trailing spaces from the whole text
+    text = text.strip()
+
+    while i < len(text):
+        print(text[i], end="")
+        if text[i] in special:
             print("\n")
             i += 1
-            while i < len(s) and s[i] == " ":
+            # Skip any spaces that follow the special character
+            while i < len(text) and text[i] == ' ':
                 i += 1
             continue
         i += 1
