@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """
 This module provides a function for text formatting.
-It specifically handles indentation and newlines based on punctuation.
+It handles indentation and newlines specifically for punctuation marks.
 """
 
 
@@ -13,10 +13,8 @@ def text_indentation(text):
     if not isinstance(text, str):
         raise TypeError("text must be a string")
 
-    # Characters that trigger a double newline
     special = (".", "?", ":")
     i = 0
-    # Requirement: No space at the beginning or end of printed lines
     text = text.strip()
 
     while i < len(text):
@@ -25,7 +23,6 @@ def text_indentation(text):
             print()
             print()
             i += 1
-            # Skip all spaces immediately following the special character
             while i < len(text) and text[i] == ' ':
                 i += 1
             continue
