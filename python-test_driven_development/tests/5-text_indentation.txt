@@ -1,0 +1,37 @@
+======================================
+Test suite for 5-text_indentation
+======================================
+
+>>> text_indentation = __import__('5-text_indentation').text_indentation
+
+Testing normal text:
+>>> text_indentation("Hello. How are you? Fine: Thanks.")
+Hello.
+<BLANKLINE>
+How are you?
+<BLANKLINE>
+Fine:
+<BLANKLINE>
+Thanks.
+<BLANKLINE>
+
+Testing multiple spaces after punctuation:
+>>> text_indentation("Wait.    Check this out.")
+Wait.
+<BLANKLINE>
+Check this out.
+
+Testing invalid type:
+>>> text_indentation(123)
+Traceback (most recent call last):
+    ...
+TypeError: text must be a string
+
+Testing empty string:
+>>> text_indentation("")
+
+Testing missing argument:
+>>> text_indentation()
+Traceback (most recent call last):
+    ...
+TypeError: text_indentation() missing 1 required positional argument: 'text'
