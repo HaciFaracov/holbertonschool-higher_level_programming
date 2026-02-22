@@ -8,6 +8,7 @@ How are you?
 Fine:
 <BLANKLINE>
 Thanks.
+<BLANKLINE>
 >>> text_indentation("Wait.    Check this out.")
 Wait.
 <BLANKLINE>
