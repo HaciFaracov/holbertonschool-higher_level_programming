@@ -6,13 +6,14 @@ This module contains a function that generates Pascal's Triangle.
 
 def pascal_triangle(n):
     """
-    Returns a list of lists of integers representing Pascal's triangle of n.
+    Returns a list of lists of integers representing
+    the Pascal's triangle of n.
 
     Args:
         n (int): The number of rows of the triangle.
 
     Returns:
-        list: A list of lists representing the triangle, or empty list if n <= 0.
+        list: A list of lists representing the triangle, or [] if n <= 0.
     """
     if n <= 0:
         return []
