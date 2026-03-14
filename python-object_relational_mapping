@@ -1,3 +1,0 @@
-sudo apt-get install python3-dev libmysqlclient-dev zlib1g-dev -y
-sudo pip3 install mysqlclient==2.0.3
-sudo pip3 install SQLAlchemy==1.4.22
