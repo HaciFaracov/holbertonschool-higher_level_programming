@@ -1,39 +1,37 @@
 #!/usr/bin/python3
-"""
-Lists all states from the database hbtn_0e_0_usa
-Arguments: mysql username, mysql password, database name
-Results sorted in ascending order by states.id
+"""List all states from the hbtn_0e_0_usa database.
+
+Connect to a local MySQL server and print each row from the states table
+ordered by id in ascending order.
 """
 
-import MySQLdb
 import sys
+
+import MySQLdb
+
+
+def fetch_states(user, password, db_name):
+    """Connect to MySQL and return rows from states ordered by id."""
+    db = MySQLdb.connect(host="localhost", port=3306,
+                         user=user, passwd=password, db=db_name)
+    cur = db.cursor()
+    cur.execute("SELECT * FROM states ORDER BY id ASC")
+    rows = cur.fetchall()
+    cur.close()
+    db.close()
+    return rows
+
+
+def main():
+    """Read command-line arguments and print each state row as a tuple."""
+    if len(sys.argv) != 4:
+        return
+    user = sys.argv[1]
+    password = sys.argv[2]
+    db_name = sys.argv[3]
+    for row in fetch_states(user, password, db_name):
+        print(row)
 
 
 if __name__ == "__main__":
-    # Get command line arguments
-    username = sys.argv[1]
-    password = sys.argv[2]
-    database = sys.argv[3]
-
-    # Connect to MySQL server
-    db = MySQLdb.connect(
-        host="localhost",
-        port=3306,
-        user=username,
-        passwd=password,
-        db=database,
-        charset="utf8"
-    )
-
-    # Create cursor and execute query
-    cur = db.cursor()
-    cur.execute("SELECT * FROM states ORDER BY id ASC")
-
-    # Fetch and print results
-    rows = cur.fetchall()
-    for row in rows:
-        print(row)
-
-    # Close cursor and database connection
-    cur.close()
-    db.close()
+    main()
