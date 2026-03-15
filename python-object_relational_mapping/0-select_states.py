@@ -1,34 +1,39 @@
 #!/usr/bin/python3
-"""List all states from the database hbtn_0e_0_usa"""
 
+"""
+This script connects to a MySQL database and retrieves all rows
+from the 'states' table, ordered by their ID in ascending order.
 
-import sys
-import MySQLdb
+Usage:
+    ./script_name.py <username> <password> <database_name>
+
+Example:
+    ./0-select_states.py root mypassword hbtn_0e_0_usa
+
+Modules:
+    sys - to retrieve command-line arguments
+    MySQLdb - to connect and interact with a MySQL database
+"""
 
 
 if __name__ == "__main__":
+    import sys
+    import MySQLdb
 
-    username = sys.argv[1]
-    password = sys.argv[2]
-    database = sys.argv[3]
+    av = sys.argv[1:]
 
-    db = MySQLdb.connect(
+    conn = MySQLdb.connect(
         host="localhost",
         port=3306,
-        user=username,
-        passwd=password,
-        db=database,
-        charset="utf8"
+        user=av[0],
+        passwd=av[1],
+        db=av[2],
+        charset="utf8",
     )
-
-    cur = db.cursor()
-
+    cur = conn.cursor()
     cur.execute("SELECT * FROM states ORDER BY id ASC")
-
-    rows = cur.fetchall()
-
-    for row in rows:
+    query_rows = cur.fetchall()
+    for row in query_rows:
         print(row)
-
     cur.close()
-    db.close()
+    conn.close()
