@@ -20,7 +20,8 @@ if __name__ == "__main__":
     )
 
     cur = conn.cursor()
-    cur.execute("SELECT * FROM states WHERE name = %s ORDER BY id ASC", (state_name,))
+    query = "SELECT * FROM states WHERE name = %s ORDER BY id ASC"
+    cur.execute(query, (state_name,))
     query_rows = cur.fetchall()
 
     for row in query_rows:
