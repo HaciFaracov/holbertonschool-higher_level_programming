@@ -23,7 +23,8 @@ def read_sql(product_id=None):
     products = []
     try:
         conn = sqlite3.connect('products.db')
-        conn.row_factory = sqlite3.Row  # Nəticəni lüğət (dict) kimi götürmək üçün
+        # This row_factory allows us to access columns by name like a dictionary!
+        conn.row_factory = sqlite3.Row
         cursor = conn.cursor()
         
         if product_id:
@@ -42,30 +43,30 @@ def read_sql(product_id=None):
 @app.route('/products')
 def display_products():
     source = request.args.get('source')
-    product_id = request.args.get('id', type=int)
+    product_id = request.args.get('id')
     
-    products = []
-    error = None
-
+    # 1. Select Data Source
     if source == 'json':
-        products = read_json()
+        data = read_json()
     elif source == 'csv':
-        products = read_csv()
+        data = read_csv()
     elif source == 'sql':
-        products = read_sql(product_id)
-        if product_id and not products:
-            error = "Product not found"
-        return render_template('product_display.html', products=products, error=error)
+        # SQL filtering is handled inside the read_sql function for efficiency
+        data = read_sql(product_id)
+        if product_id and not data:
+            return render_template('product_display.html', error="Product not found")
+        return render_template('product_display.html', products=data)
     else:
         return render_template('product_display.html', error="Wrong source")
 
-    # JSON və CSV üçün filtrasiya məntiqi (SQL özü daxildə filtr edir)
+    # 2. Filter JSON/CSV (Logic from Task 3)
     if product_id:
-        products = [p for p in products if p['id'] == product_id]
-        if not products:
-            error = "Product not found"
+        product_id = int(product_id)
+        data = [p for p in data if p['id'] == product_id]
+        if not data:
+            return render_template('product_display.html', error="Product not found")
 
-    return render_template('product_display.html', products=products, error=error)
+    return render_template('product_display.html', products=data)
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
